@@ -3,11 +3,13 @@
 namespace Sporting Moment\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Sporting Moment\Http\Requests;
 
 class EventController extends Controller
 {
+    public function __contruct() {
+      $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *

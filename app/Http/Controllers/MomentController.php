@@ -8,6 +8,9 @@ use Sporting Moment\Http\Requests;
 
 class MomentController extends Controller
 {
+    public function __contruct() {
+      $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
