@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Sporting Moment\User::class,
+            'model' => app\User::class,
         ],
 
         // 'users' => [

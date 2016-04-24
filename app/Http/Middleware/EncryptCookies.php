@@ -1,6 +1,6 @@
 <?php
 
-namespace Sporting Moment\Http\Middleware;
+namespace app\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 

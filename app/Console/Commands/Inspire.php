@@ -1,6 +1,6 @@
 <?php
 
-namespace Sporting Moment\Console\Commands;
+namespace app\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

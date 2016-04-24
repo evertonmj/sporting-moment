@@ -1,6 +1,6 @@
 <?php
 
-namespace Sporting Moment\Providers;
+namespace app\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Sporting Moment\Events\SomeEvent' => [
-            'Sporting Moment\Listeners\EventListener',
+        'app\Events\SomeEvent' => [
+            'app\Listeners\EventListener',
         ],
     ];
 

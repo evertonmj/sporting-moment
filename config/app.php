@@ -151,10 +151,10 @@ return [
         /*
          * Application Service Providers...
          */
-        Sporting Moment\Providers\AppServiceProvider::class,
-        Sporting Moment\Providers\AuthServiceProvider::class,
-        Sporting Moment\Providers\EventServiceProvider::class,
-        Sporting Moment\Providers\RouteServiceProvider::class,
+        app\Providers\AppServiceProvider::class,
+        app\Providers\AuthServiceProvider::class,
+        app\Providers\EventServiceProvider::class,
+        app\Providers\RouteServiceProvider::class,
 
     ],
 

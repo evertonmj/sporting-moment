@@ -1,8 +1,8 @@
 <?php
 
-namespace Sporting Moment\Http\Controllers\Auth;
+namespace app\Http\Controllers\Auth;
 
-use Sporting Moment\Http\Controllers\Controller;
+use app\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller

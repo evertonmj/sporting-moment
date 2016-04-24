@@ -1,6 +1,6 @@
 <?php
 
-namespace Sporting Moment\Jobs;
+namespace app\Jobs;
 
 use Illuminate\Bus\Queueable;
 

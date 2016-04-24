@@ -1,10 +1,10 @@
 <?php
 
-namespace Sporting Moment\Http\Controllers;
+namespace app\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Sporting Moment\Http\Requests;
+use app\Http\Requests;
 
 class MomentController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sporting Moment\Events;
+namespace app\Events;
 
 abstract class Event
 {

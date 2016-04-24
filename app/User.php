@@ -1,6 +1,6 @@
 <?php
 
-namespace Sporting Moment;
+namespace app;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sporting Moment;
+namespace app;
 
 use Illuminate\Database\Eloquent\Model;
 

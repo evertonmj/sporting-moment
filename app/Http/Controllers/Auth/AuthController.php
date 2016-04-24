@@ -1,10 +1,10 @@
 <?php
 
-namespace Sporting Moment\Http\Controllers\Auth;
+namespace app\Http\Controllers\Auth;
 
-use Sporting Moment\User;
+use app\User;
 use Validator;
-use Sporting Moment\Http\Controllers\Controller;
+use app\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Sporting Moment\Http\Controllers;
+namespace app\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Sporting Moment\Http\Requests;
+use app\Http\Requests;
 
 class EventController extends Controller
 {
@@ -17,7 +17,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        return view('events.index');
     }
 
     /**
@@ -38,7 +38,14 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'description' => 'required|max:2000',
+            'datetime' => 'required',
+            'localization' => 'required|max:1000',
+            'latitude_coordinate' => 'required|max:100',
+            'longitude_coordinate' => 'required|max:100'
+          ]);
     }
 
     /**
