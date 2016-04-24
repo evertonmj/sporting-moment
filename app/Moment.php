@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Moment extends Model
 {
     protected $table = "moment";
+
+    protected $fillable = ['event_id', 'description', 'time', 'url', 'type'];
     //
 
     public function event() {

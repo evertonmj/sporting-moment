@@ -8,6 +8,8 @@ class TeamEvent extends Model
 {
     protected $table = "team_event";
 
+    protected $fillable = ['team_id', 'event_id'];
+
     public function teams() {
       return $this->belongsTo(Team::class);
     }

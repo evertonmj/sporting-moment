@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
     protected $team = "team";
+
+    protected $fillable = ['name', 'description'];
     //
 
     public function events() {
