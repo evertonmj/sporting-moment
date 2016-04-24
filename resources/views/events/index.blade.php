@@ -5,8 +5,8 @@
 @section('content')
 
     <!-- Bootstrap Boilerplate... -->
-
     <div class="panel-body">
+        <h1 class="text-center">Events</h1>
         <!-- Display Validation Errors -->
         @include('common.errors')
 
@@ -28,16 +28,32 @@
                 <label for="event-description" class="col-sm-3 control-label">Event Description</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="description" id="event-description" class="form-control">
+                    <textarea name="description" id="event-description" class="form-control"></textarea>
                 </div>
             </div>
 
-            <!-- Event DateTime -->
-            <div class="form-group">
+            <!-- Event DateTime >
+            <div class="input-group date" id="event-datetimepicker">
                 <label for="event-datetime" class="col-sm-3 control-label">Event Date/Time</label>
 
                 <div class="col-sm-6">
                     <input type="text" name="datetime" id="event-datetime" class="form-control">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div-->
+
+
+            <div class="form-group">
+                <div class='col-sm-6'>
+                  <label for="event-datetime" class="col-sm-3 control-label">Event Date/Time</label>
+                  <div class='input-group date' id='event-datetime'>
+                      <input type='text' name="datetime" class="form-control" />
+                      <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                  </div>
                 </div>
             </div>
 
@@ -46,7 +62,7 @@
                 <label for="event-localization" class="col-sm-3 control-label">Event Localization</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="localization" id="event-localization" class="form-control">
+                    <textarea name="localization" id="event-localization" class="form-control"></textarea>
                 </div>
             </div>
 
@@ -143,4 +159,9 @@
             </div>
         </div>
     @endif
+    <script type="text/javascript">
+        $(function () {
+            $('#event-datetime').datetimepicker();
+        });
+    </script>
 @endsection

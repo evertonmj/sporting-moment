@@ -5,6 +5,7 @@ namespace app\Http\Controllers;
 use Illuminate\Http\Request;
 use app\Http\Requests;
 use app\Event;
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
