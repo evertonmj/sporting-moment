@@ -4,6 +4,7 @@ namespace app\Http\Controllers;
 
 use Illuminate\Http\Request;
 use app\Http\Requests;
+use app\Event;
 
 class EventController extends Controller
 {
@@ -17,7 +18,11 @@ class EventController extends Controller
      */
     public function index()
     {
-        return view('events.index');
+        $events = Event::orderBy('datetime', 'desc')->get();
+
+        return view('events.index', [
+            'events' => $events
+          ]);
     }
 
     /**
@@ -46,6 +51,20 @@ class EventController extends Controller
             'latitude_coordinate' => 'required|max:100',
             'longitude_coordinate' => 'required|max:100'
           ]);
+
+          $input = $request->all();
+          $event  = Event::Create($input);
+          //$event->save();
+          // $request->create([
+          //     'name' => $request->name,
+          //     'description' => $request->description,
+          //     'datetime' => $request->datetime,
+          //     'localization' => $request->localization,
+          //     'latitude_coordinate' => $request->latitude_coordinate,
+          //     'longitude_coordinate' => $request->longitude_coordinate
+          //   ]);
+
+            return redirect('/event');
     }
 
     /**
@@ -88,8 +107,13 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    //public function destroy($id)
+    public function destroy(Request $request, Event $event)
     {
-        //
+        //$this->authorize('destroy', $event);
+
+        $event->delete();
+
+        return redirect('/event');
     }
 }

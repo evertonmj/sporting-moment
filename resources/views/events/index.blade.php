@@ -11,7 +11,7 @@
         @include('common.errors')
 
         <!-- New Event Form -->
-        <form action="{{ url('task') }}" method="POST" class="form-horizontal">
+        <form action="{{ url('event') }}" method="POST" class="form-horizontal">
             {!! csrf_field() !!}
 
             <!-- Event Name -->
@@ -71,5 +71,76 @@
         </form>
     </div>
 
-    <!-- TODO: Current Tasks -->
+    <!-- Current Tasks -->
+    @if (count($events) > 0)
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Current Events
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-striped event-table">
+
+                    <!-- Table Headings -->
+                    <thead>
+                        <th>Event Name</th>
+                        <th>Event Description</th>
+                        <th>Event Localization</th>
+                        <th>Event Date/Time</th>
+                        <th>Event Latitude Coordinate</th>
+                        <th>Event Longitude Coordinate</th>
+                        <th>&nbsp;</th>
+                    </thead>
+
+                    <!-- Table Body -->
+                    <tbody>
+                        @foreach ($events as $event)
+                            <tr>
+                                <!-- Event Name -->
+                                <td class="table-text">
+                                    <div>{{ $event->name }}</div>
+                                </td>
+
+                                <!-- Event Description -->
+                                <td class="table-text">
+                                    <div>{{ $event->description }}</div>
+                                </td>
+
+                                <!-- Event Localization -->
+                                <td class="table-text">
+                                    <div>{{ $event->localization }}</div>
+                                </td>
+
+                                <!-- Event DateTime -->
+                                <td class="table-text">
+                                    <div>{{ $event->datetime }}</div>
+                                </td>
+
+                                <!-- Event Latitude -->
+                                <td class="table-text">
+                                    <div>{{ $event->latitude_coordinate }}</div>
+                                </td>
+
+                                <!-- Event Longitude -->
+                                <td class="table-text">
+                                    <div>{{ $event->longitude_coordinate }}</div>
+                                </td>
+
+                                <td>
+                                  <form action="{{ url('event/'.$event->id) }}" method="POST">
+                                      {!! csrf_field() !!}
+                                      {!! method_field('DELETE') !!}
+
+                                      <button type="submit" id="delete-event-{{ $event->id }}" class="btn btn-danger">
+                                          <i class="fa fa-btn fa-trash"></i>Delete
+                                      </button>
+                                  </form>
+                              </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    @endif
 @endsection
