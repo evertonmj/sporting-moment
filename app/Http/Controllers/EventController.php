@@ -44,7 +44,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+          $this->validate($request, [
             'name' => 'required|max:255',
             'description' => 'required|max:2000',
             'datetime' => 'required',
@@ -53,7 +53,7 @@ class EventController extends Controller
             'longitude_coordinate' => 'required|max:100'
           ]);
 
-          $request->datetime = $date_formatted;
+          $date_formatted = Carbon::createFromFormat('d/m/Y H:i', $request->datetime);
           $input = $request->all();
           $input['datetime'] = $date_formatted;
 
@@ -81,7 +81,11 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event = Event::find($id);
+        $datetime = Carbon::createFromFormat('Y-m-d H:i:s', $event->datetime);
+        $event->datetime = $datetime->format('d/m/Y H:i');
+
+        return view('events.update', ['event' => $event]);
     }
 
     /**
@@ -93,7 +97,27 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request, [
+        'name' => 'required|max:255',
+        'description' => 'required|max:2000',
+        'datetime' => 'required',
+        'localization' => 'required|max:1000',
+        'latitude_coordinate' => 'required|max:100',
+        'longitude_coordinate' => 'required|max:100'
+      ]);
+
+      $date_formatted = Carbon::createFromFormat('d/m/Y H:i', $request->datetime);
+      $input = [
+        'name' => $request->name,
+        'description' => $request->description,
+        'datetime' => $date_formatted,
+        'localization' => $request->localization,
+        'latitude_coordinate' => $request->latitude_coordinate,
+        'longitude_coordinate' => $request->longitude_coordinate];
+
+      $event  = Event::where('id', $id)->update($input);
+
+      return redirect('/event');
     }
 
     /**

@@ -34,8 +34,8 @@
 
             <!-- Event Date/Time -->
             <div class="form-group text-center">
+                <label for="event-datetime" class="col-sm-3 control-label">Event Date/Time</label>
                 <div class='col-sm-6'>
-                  <label for="event-datetime" class="col-sm-3 control-label">Event Date/Time</label>
                   <div class='input-group date' id='event-datetime'>
                       <input type='text' name="datetime" class="form-control" />
                       <span class="input-group-addon">
@@ -131,6 +131,14 @@
                                 </td>
 
                                 <td>
+                                  <form action="{{ url('event/'.$event->id.'/edit') }}" method="GET">
+                                      {!! csrf_field() !!}
+
+                                      <button type="submit" id="update-event-{{ $event->id }}" class="btn">
+                                          <i class="fa fa-btn fa-edit"></i>Edit
+                                      </button>
+                                  </form>
+
                                   <form action="{{ url('event/'.$event->id) }}" method="POST">
                                       {!! csrf_field() !!}
                                       {!! method_field('DELETE') !!}
