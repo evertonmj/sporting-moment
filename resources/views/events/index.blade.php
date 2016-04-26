@@ -32,20 +32,8 @@
                 </div>
             </div>
 
-            <!-- Event DateTime >
-            <div class="input-group date" id="event-datetimepicker">
-                <label for="event-datetime" class="col-sm-3 control-label">Event Date/Time</label>
-
-                <div class="col-sm-6">
-                    <input type="text" name="datetime" id="event-datetime" class="form-control">
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div-->
-
-
-            <div class="form-group">
+            <!-- Event Date/Time -->
+            <div class="form-group text-center">
                 <div class='col-sm-6'>
                   <label for="event-datetime" class="col-sm-3 control-label">Event Date/Time</label>
                   <div class='input-group date' id='event-datetime'>
@@ -161,7 +149,10 @@
     @endif
     <script type="text/javascript">
         $(function () {
-            $('#event-datetime').datetimepicker();
+            $('#event-datetime').datetimepicker({
+              locale: 'pt-br',
+              format: 'DD/MM/YYYY HH:mm'
+            });
         });
     </script>
 @endsection
