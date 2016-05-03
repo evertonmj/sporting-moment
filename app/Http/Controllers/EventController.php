@@ -7,6 +7,7 @@ use app\Http\Requests;
 use app\Event;
 use app\Team;
 use app\TeamEvent;
+use app\UserEvent;
 use Carbon\Carbon;
 use DB;
 use PDO;
@@ -194,6 +195,46 @@ class EventController extends Controller
         $result['event']['teams'] = $event->teams;
       } else {
         $result['message'] = "Error - Event not found.";
+      }
+
+      return response()->json($result);
+    }
+
+    /**
+    * Save user on event
+    */
+    public function saveUserOnEvent(Request $request) {
+      $result = ['success'=>0, 'message' => 'error'];
+
+      if(isset($request->event_id, $request->user_id)) {
+        $userEvent = new UserEvent();
+        $userEvent->user_id = $request->user_id;
+        $userEvent->event_id = $request->event_id;
+
+        if($userEvent->save()) {
+          $result['success'] = 1;
+          $result['message'] = "Yes, user is on event!";
+        }
+      }
+      return response()->json($result);
+    }
+
+    /**
+    * Save user chair status
+    */
+    public function saveUserChairStatus(Request $request) {
+      $result = ['success' => 0, 'message' => 'Whoops, we have an error'];
+
+      if(isset($request->user_id, $request->event_id, $request->on_chair)) {
+        $userEvent = UserEvent::where(['event_id' => $request->event_id, 'user_id' => $request->user_id] )->first();
+
+        if($userEvent != null) {
+          $userEvent->is_on_chair = $request->on_chair;
+          if($userEvent->save()) {
+            $result['success'] = 1;
+            $result['message'] = "Yes, user chair status updated";
+          }
+        }
       }
 
       return response()->json($result);

@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 //REST Routes
 Route::get('event/checkIfUserIsNearEvent/latitude/{latitude}/longitude/{longitude}/distance_area/{distance_area}', 'EventController@checkIfUserIsNearEvent');
+Route::post('event/saveUserOnEvent', 'EventController@saveUserOnEvent');
+Route::post('event/saveUserChairStatus', 'EventController@saveUserChairStatus');
 
 //REST Resources
 Route::resource('user', 'UserController');
