@@ -8,6 +8,8 @@ use app\Event;
 use app\Team;
 use app\TeamEvent;
 use Carbon\Carbon;
+use DB;
+use PDO;
 
 class EventController extends Controller
 {
@@ -122,8 +124,8 @@ class EventController extends Controller
         'localization' => 'required|max:1000',
         'latitude_coordinate' => 'required|max:100',
         'longitude_coordinate' => 'required|max:100',
-        'team_a' => 'required',
-        'team_b' => 'required'
+        //'team_a' => 'required',
+        //'team_b' => 'required'
       ]);
 
       $date_formatted = Carbon::createFromFormat('d/m/Y H:i', $request->datetime);
@@ -138,7 +140,7 @@ class EventController extends Controller
       $event  = Event::where('id', $id)->update($input);
 
       //create team_event record
-      if($event != null) {
+      /*if($event != null) {
         $team_event_a = new TeamEvent();
         $team_event_a->event_id = $event->id;
         $team_event_a->team_id = $request->team_a;
@@ -148,7 +150,7 @@ class EventController extends Controller
         $team_event_b->event_id = $event->id;
         $team_event_b->team_id = $request->team_b;
         $team_event_b->save();
-      }
+      }*/
 
       return redirect('/event');
     }
@@ -166,5 +168,34 @@ class EventController extends Controller
         $event->delete();
 
         return redirect('/event');
+    }
+
+    /**
+    * Checks if user is near event
+    */
+    public function checkIfUserIsNearEvent(Request $request, $latitude, $longitude, $distance_area) {
+      $result = ['success'=>0, 'message' => 'error'];
+
+      $lat = $request->latitude;
+      $lon = $request->longitude;
+      $distance_area = $request->distance_area;
+
+      $event = Event::selectRaw('*, (6371 * acos( cos( radians(?) )
+                     * cos( radians( latitude_coordinate ) ) * cos( radians( longitude_coordinate ) - radians(?) )
+                     + sin( radians(?) )
+                     * sin( radians( latitude_coordinate ) ) ) ) AS distance', [$lat, $lon, $lat])
+                   ->having('distance', '<=', $distance_area)
+                   ->first();
+
+      if($event != null) {
+        $result['success'] = 1;
+        $result['message'] = 'We have an event!';
+        $result['event'] = $event;
+        $result['event']['teams'] = $event->teams;
+      } else {
+        $result['message'] = "Error - Event not found.";
+      }
+
+      return response()->json($result);
     }
 }

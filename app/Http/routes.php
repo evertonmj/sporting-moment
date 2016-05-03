@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 
 //REST Routes
+Route::get('event/checkIfUserIsNearEvent/latitude/{latitude}/longitude/{longitude}/distance_area/{distance_area}', 'EventController@checkIfUserIsNearEvent');
+
+//REST Resources
 Route::resource('user', 'UserController');
 Route::resource('event', 'EventController');
 Route::resource('moment', 'MomentController');
