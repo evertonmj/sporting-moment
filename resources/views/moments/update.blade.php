@@ -1,4 +1,4 @@
-<!-- resources/views/events/index.blade.php -->
+<!-- resources/views/moments/index.blade.php -->
 
 @extends('layouts.app')
 
@@ -6,39 +6,48 @@
 
     <!-- Bootstrap Boilerplate... -->
     <div class="panel-body">
-        <h1 class="text-center">Events</h1>
+        <h1 class="text-center">Moments</h1>
         <!-- Display Validation Errors -->
         @include('common.errors')
 
-        <!-- New Event Form -->
-        <form action="{{ url('event/'.$event->id) }}" method="POST" class="form-horizontal">
+        <!-- update moment Form -->
+        <form action="{{ url('moment/'.$moment->id) }}" method="POST" class="form-horizontal">
             {!! csrf_field() !!}
             {!! method_field('PATCH') !!}
 
-            <!-- Event Name -->
+            <!-- Event Id -->
             <div class="form-group">
-                <label for="event-name" class="col-sm-3 control-label">Event Name</label>
+                <label for="moment-event-id" class="col-sm-3 control-label">Event</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="name" id="event-name" class="form-control" value="{{$event->name}}">
+                    <select id="moment-event_id" name="event_id" class="form-control">
+                      <option value="0">---</option>
+                      @foreach ($events as $event)
+                        @if ($event->id == $moment->event_id)
+                          <option value="{{$event->id}}" selected="selected">{{$event->name}}</option>
+                        @else
+                          <option value="{{$event->id}}">{{$event->name}}</option>
+                        @endif
+                      @endforeach
+                    </select>
                 </div>
             </div>
 
-            <!-- Event Description -->
+            <!-- moment Description -->
             <div class="form-group">
-                <label for="event-description" class="col-sm-3 control-label">Event Description</label>
+                <label for="moment-description" class="col-sm-3 control-label">Moment Description</label>
 
                 <div class="col-sm-6">
-                    <textarea name="description" id="event-description" class="form-control">{{$event->description}}</textarea>
+                    <textarea name="description" id="moment-description" class="form-control">{{$moment->description}}</textarea>
                 </div>
             </div>
 
-            <!-- Event Date/Time -->
-            <div class="form-group">
-                <label for="event-datetime" class="col-sm-3 control-label">Event Date/Time</label>
+            <!-- moment Date/Time -->
+            <div class="form-group text-center">
+                <label for="moment-time" class="col-sm-3 control-label">Moment Time</label>
                 <div class='col-sm-6'>
-                  <div class='input-group date' id='event-datetime'>
-                      <input type='text' name="datetime" class="form-control" value="{{$event->datetime}}"/>
+                  <div class='input-group date' id='moment-time'>
+                      <input type='text' name="time" class="form-control" value="{{$moment->time}}"/>
                       <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                       </span>
@@ -46,22 +55,27 @@
                 </div>
             </div>
 
-            <!-- Event Localization -->
+            <!-- moment Url -->
             <div class="form-group">
-                <label for="event-localization" class="col-sm-3 control-label">Event Localization</label>
+                <label for="moment-url" class="col-sm-3 control-label">Moment Url</label>
 
                 <div class="col-sm-6">
-                    <textarea name="localization" id="event-localization" class="form-control">{{$event->localization}}</textarea>
+                    <input type="text" name="url" id="moment-url" class="form-control" value="{{$moment->url}}">
                 </div>
             </div>
 
-            <!-- Event Coordinates -->
+            <!-- moment Type -->
             <div class="form-group">
-                <label for="event-coordinates" class="col-sm-3 control-label">Event Coordinates (Lat/Lon)</label>
+                <label for="moment-type" class="col-sm-3 control-label">Moment Type</label>
 
                 <div class="col-sm-6">
-                    Latitude: <input type="text" name="latitude_coordinate" id="event-coordinates" class="form-control" value="{{$event->latitude_coordinate}}">
-                    Longitude: <input type="text" name="longitude_coordinate" id="event-coordinates" class="form-control" value="{{$event->longitude_coordinate}}">
+                    @if ($moment->type == 'I')
+                      <input type="radio" name="type" id="moment-type" class="form-control" value="I" checked="checked"> Image
+                      <input type="radio" name="type" id="moment-type" class="form-control" value="V"> Video
+                    @else
+                      <input type="radio" name="type" id="moment-type" class="form-control" value="I"> Image
+                      <input type="radio" name="type" id="moment-type" class="form-control" value="V" checked="checked"> Video
+                    @endif
                 </div>
             </div>
 
@@ -69,7 +83,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                     <button type="submit" class="btn btn-default">
-                        <i class="fa fa-plus"></i> Update Event
+                        <i class="fa fa-plus"></i> Update Moment
                     </button>
                 </div>
             </div>
@@ -78,9 +92,9 @@
 
     <script type="text/javascript">
         $(function () {
-            $('#event-datetime').datetimepicker({
+            $('#moment-time').datetimepicker({
               locale: 'pt-br',
-              format: 'DD/MM/YYYY HH:mm'
+              format: 'HH:mm'
             });
         });
     </script>

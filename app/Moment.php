@@ -20,6 +20,6 @@ class Moment extends Model
     }
 
     public function users() {
-      return $this->belongsToMany('App\User', 'user_moment')
+      return $this->belongsToMany('App\User', 'user_moment');
     }
 }

@@ -55,7 +55,7 @@
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                       <li><a href="/event">Events</a></li>
-                      <li><a href="#">Moments</a></li>
+                      <li><a href="/moment">Moments</a></li>
                       <li><a href="/team">Teams</a></li>
                       <li><a href="#">Users</a></li>
                     </ul>
