@@ -32,6 +32,24 @@
                 </div>
             </div>
 
+            <!-- Event Teams -->
+            <div class="form-group">
+                <label for="event-teams" class="col-sm-3 control-label">Teams</label>
+
+                <div class="col-sm-6">
+                    Team A: <select id="event-team_a" name="team_a" class="form-control">
+                      @foreach ($teams as $team)
+                        <option value="{{$team->id}}">{{$team->name}}</option>
+                      @endforeach
+                    </select>
+                    Team B: <select id="event-team_b" name="team_b" class="form-control">
+                      @foreach ($teams as $team)
+                        <option value="{{$team->id}}">{{$team->name}}</option>
+                      @endforeach
+                    </select>
+                </div>
+            </div>
+
             <!-- Event Date/Time -->
             <div class="form-group text-center">
                 <label for="event-datetime" class="col-sm-3 control-label">Event Date/Time</label>
