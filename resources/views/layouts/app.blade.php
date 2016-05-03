@@ -54,10 +54,10 @@
                   <!-- Collect the nav links, forms, and other content for toggling -->
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                      <li><a href="/event">Eventos</a></li>
-                      <li><a href="#">Momentos</a></li>
-                      <li><a href="#">Times</a></li>
-                      <li><a href="#">Usuário</a></li>
+                      <li><a href="/event">Events</a></li>
+                      <li><a href="#">Moments</a></li>
+                      <li><a href="/team">Teams</a></li>
+                      <li><a href="#">Users</a></li>
                     </ul>
                   </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
