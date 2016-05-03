@@ -8,6 +8,7 @@ use app\Event;
 use app\Team;
 use app\TeamEvent;
 use app\UserEvent;
+use app\Moment;
 use Carbon\Carbon;
 use DB;
 use PDO;
@@ -175,7 +176,7 @@ class EventController extends Controller
     * Checks if user is near event
     */
     public function checkIfUserIsNearEvent(Request $request, $latitude, $longitude, $distance_area) {
-      $result = ['success'=>0, 'message' => 'error'];
+      $result = ['success' => 0, 'message' => 'Whoops, we have an error'];
 
       $lat = $request->latitude;
       $lon = $request->longitude;
@@ -204,7 +205,7 @@ class EventController extends Controller
     * Save user on event
     */
     public function saveUserOnEvent(Request $request) {
-      $result = ['success'=>0, 'message' => 'error'];
+      $result = ['success' => 0, 'message' => 'Whoops, we have an error'];
 
       if(isset($request->event_id, $request->user_id)) {
         $userEvent = new UserEvent();
@@ -234,6 +235,52 @@ class EventController extends Controller
             $result['success'] = 1;
             $result['message'] = "Yes, user chair status updated";
           }
+        }
+      }
+
+      return response()->json($result);
+    }
+
+    /**
+    * Check if there's important moments and return count
+    */
+    public function checkIfImportantMomentHasOccured(Request $request, $id, $time_frame) {
+      $result = ['success' => 0, 'message' => 'Whoops, we have an error'];
+
+      $event = Event::find($id);
+
+      if($event != null) {
+        $moments = Moment::where('event_id', $id)->whereRaw("time > date_sub(now(), interval ? minute)", [$time_frame])->get();
+
+        if($moments->count() > 0) {
+          $result['success'] = 1;
+          $result['message'] = "Yes, we have important moments!";
+          $result['moments'] = $moments->count();
+        } else {
+          $result['success'] = 1;
+          $result['message'] = "No moments found!";
+          $result['moments'] = 0;
+        }
+      }
+
+      return response()->json($result);
+    }
+
+    public function getImportantMoments(Request $request, $id, $time_frame) {
+      $result = ['success' => 0, 'message' => 'Whoops, we have an error'];
+
+      $event = Event::find($id);
+
+      if($event != null) {
+        $moments = Moment::where('event_id', $id)->whereRaw("time > date_sub(now(), interval ? minute)", [$time_frame])->get();
+
+        if($moments->count() > 0) {
+          $result['success'] = 1;
+          $result['message'] = "Yes, we have important moments!";
+          $result['moments'] = $moments;
+        } else {
+          $result['success'] = 0;
+          $result['message'] = "No moments found!";
         }
       }
 
