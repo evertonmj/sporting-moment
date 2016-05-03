@@ -272,7 +272,7 @@ class EventController extends Controller
       $event = Event::find($id);
 
       if($event != null) {
-        $moments = Moment::where('event_id', $id)->whereRaw("time > date_sub(now(), interval ? minute)", [$time_frame])->get();
+        $moments = Moment::where('event_id', $id)->whereRaw("time > date_sub(now(), interval ? minute)", [$time_frame])->orderBy('time', 'desc')->get();
 
         if($moments->count() > 0) {
           $result['success'] = 1;
