@@ -92,7 +92,20 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+        $result = ['success' => 0, 'message' => 'Whoops, we have an error'];
+        $event = Event::find($id);
+
+        if($event != null) {
+            $result['success'] = 1;
+            $result['message'] = 'Your event!';
+            $result['event'] = $event->toArray();
+            $result['event']['teams'] = $event->teams;
+            $result['event']['moments'] = $event->moments;
+        }
+        //$moments = Moment::where('event_id', $id)->whereRaw("time > date_sub(now(), interval ? minute)", [$time_frame])->orderBy('time', 'desc')->get();
+
+        return response()->json($result);
+
     }
 
     /**
