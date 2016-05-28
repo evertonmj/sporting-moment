@@ -21,7 +21,8 @@ Route::post('event/saveUserOnEvent', 'EventController@saveUserOnEvent');
 Route::post('event/saveUserChairStatus', 'EventController@saveUserChairStatus');
 Route::get('event/{id}/checkIfImportantMomentHasOccured/time_frame/{time_frame}', 'EventController@checkIfImportantMomentHasOccured');
 Route::get('event/{id}/getImportantMoments/time_frame/{time_frame}', 'EventController@getImportantMoments');
-Route::get('event/getAllTeamEvents/team_id/{team_id}', 'EventController@getAllTeamEvents');
+Route::get('team/{team_id}/getAllTeamEvents/', 'TeamController@getAllTeamEvents');
+Route::get('event/getEventsToday', 'EventController@getEventsToday');
 
 //REST Resources
 Route::resource('user', 'UserController');
