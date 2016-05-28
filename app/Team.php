@@ -12,10 +12,10 @@ class Team extends Model
     //
 
     public function events() {
-      return $this->belongsToMany('App\Event', 'team_event');
+      return $this->belongsToMany('app\Event', 'team_event');
     }
 
     public function moments() {
-      return $this->belongsToMany('App\Moment', 'team_moment');
+      return $this->belongsToMany('app\Moment', 'team_moment');
     }
 }

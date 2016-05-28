@@ -299,4 +299,21 @@ class EventController extends Controller
 
       return response()->json($result);
     }
+
+    public function getAllTeamEvents(Request $request, $team_id) {
+      $result = ['success' => 0, 'message' => 'Whoops, we have an error'];
+
+      $team = Team::find($team_id);
+
+      if($team->events->count() > 0) {
+        $results['success'] = 1;
+        $result['message'] = "Yes, we have events!";
+        $result['events'] = $team->events;
+      } else {
+        $result['success'] = 0;
+        $result['message'] = "No events found!";
+      }
+
+      return response()->json($result);
+    }
 }
