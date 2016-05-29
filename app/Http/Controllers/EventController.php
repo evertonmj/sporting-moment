@@ -303,12 +303,13 @@ class EventController extends Controller
     public function getEventsToday(Request $request) {
       $result = ['success' => 0, 'message' => 'Whoops, we have an error'];
 
-      $events = Event::whereRaw('DATE(datetime) = ?', [date('Y-m-d')])->get();
+      $events = Event::whereRaw('DATE(datetime) = ?', [date('Y-m-d')])->with('teams')->get();
 
       if($events->count() > 0) {
         $result['success'] = 1;
         $result['message'] = "Yes, we have events today!";
-        $result['moments'] = $events;
+
+        $result['events'] = $events;
       } else {
         $result['success'] = 0;
         $result['message'] = "We have no events today...";
