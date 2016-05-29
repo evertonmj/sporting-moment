@@ -200,13 +200,14 @@ class EventController extends Controller
                      + sin( radians(?) )
                      * sin( radians( latitude_coordinate ) ) ) ) AS distance', [$lat, $lon, $lat])
                    ->having('distance', '<=', $distance_area)
-                   ->first();
+                   ->with('teams')
+                   ->get();
 
       if($event != null) {
         $result['success'] = 1;
-        $result['message'] = 'We have an event!';
+        $result['message'] = 'We have event(s)!';
         $result['event'] = $event;
-        $result['event']['teams'] = $event->teams;
+        //$result['event']['teams'] = $event->teams;
       } else {
         $result['message'] = "Error - Event not found.";
       }
