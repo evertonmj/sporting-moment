@@ -118,6 +118,23 @@ class TeamController extends Controller
       return redirect('/team');
   }
 
+  public function getAllTeams(Request $request) {
+    $result = ['success' => 0, 'message' => 'Whoops, we have an error'];
+
+    $teams = Team::get();
+
+    if($teams->count()) {
+      $result['success'] = 1;
+      $result['message'] = 'Here are our teams!';
+      $result['teams'] = $teams;
+    } else {
+      $result['success'] = 0;
+      $result['message'] = 'We have no teams';
+    }
+
+    return response()->json($result);
+  }
+
   public function getAllTeamEvents(Request $request, $team_id) {
     $result = ['success' => 0, 'message' => 'Whoops, we have an error'];
 

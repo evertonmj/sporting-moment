@@ -23,6 +23,7 @@ Route::get('event/{id}/checkIfImportantMomentHasOccured/time_frame/{time_frame}'
 Route::get('event/{id}/getImportantMoments/time_frame/{time_frame}', 'EventController@getImportantMoments');
 Route::get('team/{team_id}/getAllTeamEvents/', 'TeamController@getAllTeamEvents');
 Route::get('event/getEventsToday', 'EventController@getEventsToday');
+Route::get('team/getAllTeams', 'TeamController@getAllTeams');
 
 //REST Resources
 Route::resource('user', 'UserController');
