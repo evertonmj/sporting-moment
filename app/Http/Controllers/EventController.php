@@ -195,7 +195,7 @@ class EventController extends Controller
       $lon = $request->longitude;
       $distance_area = $request->distance_area;
 
-      $event = Event::selectRaw('*, (6371 * acos( cos( radians(?) )
+      $events = Event::selectRaw('*, (6371 * acos( cos( radians(?) )
                      * cos( radians( latitude_coordinate ) ) * cos( radians( longitude_coordinate ) - radians(?) )
                      + sin( radians(?) )
                      * sin( radians( latitude_coordinate ) ) ) ) AS distance', [$lat, $lon, $lat])
@@ -206,7 +206,7 @@ class EventController extends Controller
       if($event != null) {
         $result['success'] = 1;
         $result['message'] = 'We have event(s)!';
-        $result['event'] = $event;
+        $result['events'] = $events;
         //$result['event']['teams'] = $event->teams;
       } else {
         $result['message'] = "Error - Event not found.";
