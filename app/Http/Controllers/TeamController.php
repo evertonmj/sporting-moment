@@ -5,6 +5,7 @@ namespace app\Http\Controllers;
 use Illuminate\Http\Request;
 use app\Http\Requests;
 use app\Team;
+use app\TeamEvent;
 
 class TeamController extends Controller
 {
@@ -141,8 +142,25 @@ class TeamController extends Controller
     $team = Team::find($team_id);
 
     if($team->events->count() > 0) {
-      $results['success'] = 1;
+      $result['success'] = 1;
       $result['message'] = "Yes, we have events!";
+      $result['events'] = $team->events;
+    } else {
+      $result['success'] = 0;
+      $result['message'] = "No events found!";
+    }
+
+    return response()->json($result);
+  }
+
+  public function getAllTeamMoments(Request $request, $team_id) {
+    $result = ['success' => 0, 'message' => 'Whoops, we have an error'];
+
+    $team = Team::with('events.moments')->find($team_id);
+
+    if($team->count() > 0) {
+      $result['success'] = 1;
+      $result['message'] = "Yes, we have events and moments!";
       $result['events'] = $team->events;
     } else {
       $result['success'] = 0;
