@@ -203,7 +203,7 @@ class EventController extends Controller
                    ->with('teams')
                    ->get();
 
-      if($event != null) {
+      if($events != null) {
         $result['success'] = 1;
         $result['message'] = 'We have event(s)!';
         $result['events'] = $events;
