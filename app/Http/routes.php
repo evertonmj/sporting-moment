@@ -25,6 +25,8 @@ Route::get('team/{team_id}/getAllTeamEvents/', 'TeamController@getAllTeamEvents'
 Route::get('event/getEventsToday', 'EventController@getEventsToday');
 Route::get('team/getAllTeams', 'TeamController@getAllTeams');
 Route::get('team/{team_id}/getAllTeamMoments', 'TeamController@getAllTeamMoments');
+Route::post('user/{user_id}/saveUserTeamFav/teamId/{teamId}', 'UserController@saveUserTeamFav');
+Route::get('team/getAllTeamUserMoments/userId/{userId}', 'TeamController@getAllTeamUserMoments');
 
 //REST Resources
 Route::resource('user', 'UserController');

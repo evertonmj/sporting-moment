@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use app\Http\Requests;
 use app\Team;
 use app\TeamEvent;
+use app\UserTeam;
 
 class TeamController extends Controller
 {
@@ -162,6 +163,23 @@ class TeamController extends Controller
       $result['success'] = 1;
       $result['message'] = "Yes, we have events and moments!";
       $result['events'] = $team->events;
+    } else {
+      $result['success'] = 0;
+      $result['message'] = "No events found!";
+    }
+
+    return response()->json($result);
+  }
+
+  public function getAllTeamUserMoments(Request $request, $user_id) {
+    $result = ['success' => 0, 'message' => 'Whoops, we have an error'];
+
+    $userTeam = UserTeam::with('team.moments')->where(['user_id' => $user_id])->get();
+
+    if($userTeam->count() > 0) {
+      $result['success'] = 1;
+      $result['message'] = "Yes, we have events and moments!";
+      $result['teams'] = $userTeam;
     } else {
       $result['success'] = 0;
       $result['message'] = "No events found!";

@@ -7,6 +7,7 @@ use app\Http\Requests;
 use app\Event;
 use app\Moment;
 use Carbon\Carbon;
+use app\TeamMoment;
 
 class MomentController extends Controller
 {
@@ -60,6 +61,16 @@ class MomentController extends Controller
           $input['time'] = $time_formatted;
 
           $moment  = Moment::Create($input);
+
+          //create team_moment record
+          $event = Event::find($request->event_id);
+
+          foreach($event->teams as $team) {
+            $teamMoment = new TeamMoment();
+            $teamMoment->team_id = $team->id;
+            $teamMoment->moment_id = $moment->id;
+            $teamMoment->save();
+          }
 
           return redirect('/moment');
     }
