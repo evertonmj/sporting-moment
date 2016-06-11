@@ -31,3 +31,7 @@ Route::resource('user', 'UserController');
 Route::resource('event', 'EventController');
 Route::resource('moment', 'MomentController');
 Route::resource('team', 'TeamController');
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
